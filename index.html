@@ -33,8 +33,10 @@
       
       async function getLocation() {
         try {
-          const pos = await navigator.geolocation.getCurrentPosition()
-          currentPosition.value = JSON.stringify(pos);
+          await navigator.geolocation.getCurrentPosition(
+            pos => currentPosition.value = JSON.stringify(pos),
+            err => currentPosition.value = err
+          )
         } catch (err) {
           currentPosition.value = err
         }
