@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+        "geolocation" in navigator
+        </td>
+        <td>
+          <input id="geolocationInNavigator" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+        current position
+        </td>
+        <td>
+          <input id="currentPosition" />
+        </td>
+      </tr>
+    </table>
+    <button onclick="getLocation">Get location</button>
+    <script>
+      const geolocationInNavigator = document.querySelector("#geolocationInNavigator")
+      const currentPosition = document.querySelector("#currentPosition")
+      
+      setInterval(() => {
+        geolocationInNavigator.value = JSON.stringify("geolocation" in navigator)
+      }, 1000);
+      
+      async function getLocation() {
+        try {
+          const pos = await navigator.geolocation.getCurrentPosition()
+          currentPosition.value = JSON.stringify(pos);
+        } catch (err) {
+          currentPosition.value = err
+        }
+      }
+    </script>
+  </body>
+</html>
