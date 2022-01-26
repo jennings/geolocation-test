@@ -34,7 +34,10 @@
       async function getLocation() {
         try {
           await navigator.geolocation.getCurrentPosition(
-            pos => currentPosition.value = JSON.stringify(pos),
+            pos => {
+              const { latitude, longitude, accuracy } = pos.coords;
+              currentPosition.value = JSON.stringify({ latitude, longitude, accuracy })
+            },
             err => currentPosition.value = err
           )
         } catch (err) {
